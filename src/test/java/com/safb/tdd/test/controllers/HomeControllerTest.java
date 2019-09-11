@@ -1,7 +1,6 @@
 package com.safb.tdd.test.controllers;
 
 import com.safb.tdd.config.AppConfig;
-import com.safb.tdd.config.ViewConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
