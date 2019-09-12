@@ -14,10 +14,25 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+/**
+ * The database configuration responsible for successfully making the database connections and mapping the entities.
+ *
+ * @author Atanas Yordanov Arshinkov
+ * @since 1.0.0
+ */
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.safb.tdd.repository"})
 @EnableTransactionManagement
 public class DatabaseConfig {
+
+
+    /**
+     * The defined bean sets the driver class name, url to the database itself, username and password, for accessing the chosen schema.
+     *
+     * @return A datasource instance containing database connection description.
+     * @author Atanas Yordanov Arshinkov
+     * @since 1.0.0
+     */
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -35,6 +50,11 @@ public class DatabaseConfig {
         return jpaVendorAdapter;
     }
 
+    /**
+     * @return Database properties as dialects, showing and formatting the SQL query to the console.
+     * @author Atanas Yordanov Arshinkov
+     * @since 1.0.0
+     */
     private Properties jpaProperties() {
         Properties jpaProperties = new Properties();
         jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
@@ -44,6 +64,13 @@ public class DatabaseConfig {
         return jpaProperties;
     }
 
+    /**
+     * This method automatically maps the all created entities to their respective database tables in the schema.
+     *
+     * @return The entity manager factory bean
+     * @author Atanas Yordanov Arshinkov
+     * @since 1.0.0
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
@@ -56,6 +83,11 @@ public class DatabaseConfig {
         return entityManagerFactory;
     }
 
+    /**
+     * @return The jdbc instance for connecting to the database.
+     * @author Atanas Yordanov Arshinkov
+     * @since 1.0.0
+     */
     @Bean
     public JdbcTemplate jdbcTemplate() {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();

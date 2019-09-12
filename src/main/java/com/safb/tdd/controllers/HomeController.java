@@ -1,18 +1,29 @@
 package com.safb.tdd.controllers;
 
-import org.slf4j.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * The main controller which the application starts from.
+ *
+ * @author Atanas Yordanov Arshinkov
+ * @since 1.0.0
+ */
 @Controller
 public class HomeController {
+
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * @param model Takes automatically the model and it is present
      *              in the method for adding different kind of attributes
      * @return the main Home view
+     * @author Atanas Yordanov Arshinkov
+     * @see org.springframework.ui.Model
+     * @since 1.0.0
      */
     @GetMapping(value = "/")
     public String home(Model model) {
