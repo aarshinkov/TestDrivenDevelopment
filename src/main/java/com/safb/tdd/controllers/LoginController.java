@@ -20,7 +20,7 @@ public class LoginController {
     /**
      * @param model Takes automatically the model when a request is made
      * @return the login page of the application
-     * @author Atanas Arshinkov
+     * @author Atanas Yordanov Arshinkov
      * @since 1.0.0
      */
     @GetMapping(value = "/login")
