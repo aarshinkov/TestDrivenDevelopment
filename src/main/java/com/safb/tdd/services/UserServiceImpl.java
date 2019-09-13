@@ -1,17 +1,14 @@
 package com.safb.tdd.services;
 
+import com.safb.tdd.dao.UserDao;
 import com.safb.tdd.entity.User;
 import com.safb.tdd.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * The class is an implementation on the {@link com.safb.tdd.services.UserService} interface.
@@ -38,6 +35,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UsersRepository usersRepository;
 
+    /**
+     * User Data Access object for executing more complex queries to the database.
+     */
+    @Autowired
+    private UserDao userDao;
+
 
     /**
      * When the method is called it will get all  users and return it as a collection.
@@ -61,25 +64,12 @@ public class UserServiceImpl implements UserService {
      * @since 1.0.0
      */
     @Override
-    public List<User> getUsers(Integer count) throws SQLException {
-        String sql = "SELECT * FROM users LIMIT ?";
+    public List<User> getUsers(Integer count) throws IllegalArgumentException, SQLException {
 
-        PreparedStatement ps = Objects.requireNonNull(jdbcTemplate.getDataSource()).getConnection().prepareCall(sql);
-        ps.setInt(1, count);
-
-        ResultSet rs = ps.executeQuery();
-
-        List<User> users = new ArrayList<>();
-
-        while (rs.next()) {
-            User user = new User();
-            user.setUserId(rs.getInt("user_id"));
-            user.setUsername(rs.getString("username"));
-            user.setPassword(rs.getString("password"));
-
-            users.add(user);
+        if (count <= 0) {
+            throw new IllegalArgumentException("The count cannot be 0 or negative");
         }
 
-        return users;
+        return userDao.getUsersCount(count);
     }
 }

@@ -2,7 +2,7 @@ package com.safb.tdd.repository;
 
 import com.safb.tdd.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @see com.safb.tdd.entity.User
  * @since 1.0.0
  */
-@Component
+@Repository
 public interface UsersRepository extends JpaRepository<User, Integer> {
 
     /**

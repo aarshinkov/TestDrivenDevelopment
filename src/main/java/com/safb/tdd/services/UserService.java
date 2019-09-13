@@ -30,9 +30,10 @@ public interface UserService {
      *
      * @param count The number of {@link com.safb.tdd.entity.User} objects to be returned as a collection;
      * @return {@link java.util.List} collection of all {@link com.safb.tdd.entity.User} objects, stored in the database
-     * @throws SQLException If the method cannot connect to the database it will throw an exception
+     * @throws IllegalArgumentException If the count value is zero or negative
+     * @throws SQLException             If the method cannot connect to the database
      * @author Atanas Yordanov Arshinkov
      * @since 1.0.0
      */
-    List<User> getUsers(Integer count) throws SQLException;
+    List<User> getUsers(Integer count) throws IllegalArgumentException, SQLException;
 }
