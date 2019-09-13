@@ -68,7 +68,6 @@ public class UserServiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void getUsersCount_PassZero_ThrowException() throws SQLException {
         userService.getUsers(0);
-        userService.getUsers(-1);
     }
 
     @Test(expected = IllegalArgumentException.class)
